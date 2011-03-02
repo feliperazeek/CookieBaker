@@ -1,5 +1,8 @@
 CookieBaker
-http://geeks.aretotally.in
+
+http://feliperazeek.github.com/CookieBaker/
+http://geeks.aretotally.in/
+
 Felipe Oliveira
 March 2nd 2011
 
@@ -39,3 +42,8 @@ Limitations:
 - CookieBaker stores the cookie in JSON format using Jackson, be aware for the size of the cookie if the POJO has too many properties.
 - POJO must have a default constructor which is a requirement of Jackson's ObjectMapper.
 
+
+
+Roadmap:
+
+- Integrate HTML5 Local Storage with browser auto-detection.
