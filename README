@@ -7,9 +7,9 @@ Felipe Oliveira
 March 2nd 2011
 
 CookieBaker is a dead simple Java library to read and write cookies in POJO form to avoid string splits and joins all over your codebase. Behind the scenes CookieBaker stores the cookie in JSON format using Jackson.
-CookieBaker also provides HMAC support off-shelve, currently using SHA1 by default. 
+CookieBaker also provides HMAC (http://www.cse.msu.edu/~alexliu/publications/Cookie/cookie.pdf) support off the shelve, currently using SHA1 by default. 
 
-1) Define a simple Pojo with a default constructor (required by Jackson)
+1) Define a simple POJO with a default constructor (required by Jackson)
 
 public class SampleObject implements Serializable {
 
