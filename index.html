@@ -5,33 +5,36 @@
 
   <title>feliperazeek/CookieBaker @ GitHub</title>
 
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #7d310b;
-      font-family: "Verdana,Helvetica,Arial,FreeSans";
-      color: #ffffff;
+      background-color: #ccc;
+      font-family: 'Droid Serif;
+      color: #000;
+	text-shadow: #eee 1px -1px 1px;
     }
     #container {
       margin: 0 auto;
-      width: 700px;
+      width: 850px;
     }
-    h1 { font-size: 3.8em; color: #82cef4; margin-bottom: 3px; }
+    h1 { font-size: 3.8em; color: black; margin-bottom: 3px; font-family: 'Droid Serif; }
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #82cef4; }
-    h3 { text-align: center; color: #82cef4; }
-    a { color: #82cef4; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    h2 { font-size: 1.5em; color: black; font-family: 'Droid Serif;}
+    h3 { text-align: center; color: black; font-family: 'Droid Serif;}
+    a { color: black; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: none;}
     .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
+    pre { text-shadow: none; background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
   </style>
 </head>
 
 <body>
-  <a href="http://github.com/feliperazeek/CookieBaker"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<font face="Droid Serif">
+  <a href="http://github.com/feliperazeek/CookieBaker"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblack_121621.png" alt="Fork me on GitHub" /></a>
 
   <div id="container">
 
@@ -60,8 +63,43 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </center>
 
     <div class="description">
-      CookieBaker is a simple Java library to read and write cookies in POJO form to avoid string splits and joins all over your codebase.  CookieBaker also provides HMAC support off-shelve, currently using SHA1 by default. 
+      CookieBaker is a dead simple Java library to read and write cookies in POJO form to avoid string splits and joins all over your codebase. Behind the scenes CookieBaker stores the cookie in JSON format using Jackson. CookieBaker also provides HMAC support off-shelve, currently using SHA1 by default. 
     </div>
+
+<h2>Usage</h2>
+
+<p>
+Define a simple Pojo with a default constructor (required by Jackson)
+</p>
+
+<pre>
+public class SampleObject implements Serializable {
+
+	private String myString;
+
+	public SampleObject() {}
+	
+	public String getMyString() {
+		return myString;
+	}
+
+	public void setMyString(String myString) {
+		this.myString = myString;
+	}
+}
+</pre>
+
+<p>Set Cookie</p>
+<pre>
+CookieBaker.saveCookie(response, cookieName, mySampleObjectInstance);
+</pre>
+
+<p>Get Cookie</p>
+
+<pre>
+SampleObject o = CookieBaker.getCookie(request, SampleObject.class, cookieName);
+</pre>
+
 
     <h2>Dependencies</h2>
 <p>JUnit, Servlet API, Jackson, Spring Test</p>
@@ -69,14 +107,21 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <p>git clone git@github.com:feliperazeek/CookieBaker.git<br>
 cd CookieBaker<br>
 mvn install<br>
-Import jar to your CLASSPATH or Maven dependency to your project.<br>
+Import jar to your CLASSPATH or add Maven dependency to your project.<br>
+<pre>
+    &lt;dependency&gt;
+      &lt;groupId&gt;geeks.aretotally.in&lt;/groupId&gt;
+      &lt;artifactId&gt;cookiebaker&lt;/artifactId&gt;
+      &lt;version&gt;0.1&lt;/version&gt;
+    &lt;/dependency&gt;
+</pre>
 </p>
 <h2>Roadmap</h2>
 Integrate HTML5 Local Storage with browser auto-detection.
 <h2>License</h2>
 <p>The GNU General Public License, or GPL, is an open source license. Open source doesn't just mean that you can view the source code — it has political and philosophical implications as well. Open source, or "Free Software", means you are free to modify and redistribute the source code under certain conditions. Free doesn't refer to the price, it refers to freedom. The difference between the two meanings of free is often characterized as "Free as in speech vs. free as in beer." The GPL is free as in speech.</p>
-<h2>Authors</h2>
-<p>Felipe Oliveira<br><br/><a href="http://geeks.aretotally.in">Geeks Are Totally In!</a><br><br/><a href="http://twitter.com/_felipera">Twitter</a><br><br/><br/>      </p>
+<h2>Author</h2>
+<p>Felipe Oliveira (felipera at gmail dot com)<br><br/>Blog: <a href="http://geeks.aretotally.in">Geeks Are Totally In!</a><br><br/>Twitter: <a href="http://twitter.com/_felipera">@_felipera</a><br>      </p>
 
 
     <h2>Download</h2>
@@ -105,10 +150,10 @@ Integrate HTML5 Local Storage with browser auto-detection.
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s)
   })();
 
 </script>
-  
+ </font> 
 </body>
 </html>
