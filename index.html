@@ -63,13 +63,14 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </center>
 
     <div class="description">
-      CookieBaker is a dead simple Java library to read and write cookies in POJO form to avoid string splits and joins all over your codebase. Behind the scenes CookieBaker stores the cookie in JSON format using Jackson. CookieBaker also provides HMAC support off-shelve, currently using SHA1 by default. 
+      CookieBaker is a dead simple Java library to read and write cookies in POJO form to avoid string splits and joins all over your codebase. Behind the scenes CookieBaker stores the cookie in JSON format using Jackson. CookieBaker also provides HMAC support off the shelve, currently using SHA1 by default. 
     </div>
 
+<br>
 <h2>Usage</h2>
 
 <p>
-Define a simple Pojo with a default constructor (required by Jackson)
+Define a simple POJO with a default constructor (required by Jackson)
 </p>
 
 <pre>
@@ -100,9 +101,10 @@ CookieBaker.saveCookie(response, cookieName, mySampleObjectInstance);
 SampleObject o = CookieBaker.getCookie(request, SampleObject.class, cookieName);
 </pre>
 
-
-    <h2>Dependencies</h2>
+<br>
+<h2>Dependencies</h2>
 <p>JUnit, Servlet API, Jackson, Spring Test</p>
+<br>
 <h2>Install</h2>
 <p>git clone git@github.com:feliperazeek/CookieBaker.git<br>
 cd CookieBaker<br>
@@ -116,14 +118,17 @@ Import jar to your CLASSPATH or add Maven dependency to your project.<br>
     &lt;/dependency&gt;
 </pre>
 </p>
+<br>
 <h2>Roadmap</h2>
-Integrate HTML5 Local Storage with browser auto-detection.
+<p>Integrate HTML5 Local Storage with browser auto-detection.</p>
+<br>
 <h2>License</h2>
 <p>The GNU General Public License, or GPL, is an open source license. Open source doesn't just mean that you can view the source code — it has political and philosophical implications as well. Open source, or "Free Software", means you are free to modify and redistribute the source code under certain conditions. Free doesn't refer to the price, it refers to freedom. The difference between the two meanings of free is often characterized as "Free as in speech vs. free as in beer." The GPL is free as in speech.</p>
+<br>
 <h2>Author</h2>
 <p>Felipe Oliveira (felipera at gmail dot com)<br><br/>Blog: <a href="http://geeks.aretotally.in">Geeks Are Totally In!</a><br><br/>Twitter: <a href="http://twitter.com/_felipera">@_felipera</a><br>      </p>
 
-
+<br>
     <h2>Download</h2>
     <p>
       You can download this project in either
