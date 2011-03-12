@@ -1,14 +1,18 @@
 package geeks.aretotally.in.cookiebaker;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.logging.Logger;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
+// TODO: Auto-generated Javadoc
 /**
  * CookieBaker helps you save and read simple pojos as cookies
  * 
@@ -65,6 +69,7 @@ public abstract class CookieBaker {
 			
 			// Get Value
 			String value = cookie.getValue();
+			value = decode(value);
 			
 			// Get Token
 			String existingCryptToken = HmacKeyUtil.seperateTokenFromCookieString(value);
@@ -79,11 +84,11 @@ public abstract class CookieBaker {
 			}
 			
 			// Map Object
-			Object data = getMapper().readValue(cookie.getValue(), clazz);
+			Object data = getMapper().readValue(decode(cookie.getValue()), clazz);
 			return (T) data;
 			
 		} catch (Throwable t) {
-			throw new RuntimeException(t);
+			throw new RuntimeException(ExceptionUtil.getStackTrace(t));
 		}
 	}
 
@@ -131,29 +136,45 @@ public abstract class CookieBaker {
 			throw new RuntimeException(t);
 		}
 	}
+	
+	/**
+	 * Decode.
+	 *
+	 * @param msg the msg
+	 * @return the string
+	 */
+	private static String decode(String msg) {
+		return StringEscapeUtils.unescapeJava(msg);
+	}
+	
+	/**
+	 * Encode.
+	 *
+	 * @param msg the msg
+	 * @return the string
+	 */
+	private static String encode(String msg) {
+		return StringEscapeUtils.escapeJava(msg);
+	}
 
 	/**
 	 * Sets the cookie.
-	 * 
-	 * @param response
-	 *            the response
-	 * @param name
-	 *            the name
-	 * @param value
-	 *            the value
-	 * @param path
-	 *            the path
-	 * @param maxAge
-	 *            the max age
-	 * @param domain
-	 *            the domain
+	 *
+	 * @param response the response
+	 * @param name the name
+	 * @param value the value
+	 * @param path the path
+	 * @param maxAge the max age
+	 * @param domain the domain
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
-	private static void setCookie(HttpServletResponse response, String name, String value, String path, Integer maxAge, String domain) {
+	private static void setCookie(HttpServletResponse response, String name, String value, String path, Integer maxAge, String domain) throws UnsupportedEncodingException {
 		if (response == null) {
 			return;
 		}
 		String token = HmacKeyUtil.getCryptographicToken(value);
 		value = value + token;
+		value = encode(value);
 		Cookie c = new Cookie(name, value);
 		c.setPath(path);
 		c.setMaxAge(maxAge);
